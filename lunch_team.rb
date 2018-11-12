@@ -1,6 +1,6 @@
 team_number = 3
 TEAMS = []
-SQUAD = []          #final valid groups
+SQUAD = []       #final valid groups
 
 #input array of hash
 
@@ -23,11 +23,18 @@ def make_group(team_number,members)             #random groups
   TEAMS.combination(team_number).to_a
 end
 
-def print_list(array_of_arrays)                 #print list
-  array_of_arrays.each do |a|
-    p a
+def print_groups(array_of_arrays)                 #print list
+  j=1
+  #array_of_arrays= array_of_arrays.each_slice(3).to_a
+  while array_of_arrays.size > 3
+    puts "DAY #{j}"
+    j+=1
+    puts "-------------------------------------------------------------------------------------------------------"
+    p array_of_arrays[0..2]
+    array_of_arrays.slice!(0..2)
   end
 end
+
 
 def lunch_team(groups,members)                  #finding valid squad
   groups.each do |group|
@@ -52,4 +59,4 @@ end
 
 groups = make_group(team_number,members)
 lunch_team(groups,members)
-print_list(SQUAD)
+print_groups(SQUAD)
