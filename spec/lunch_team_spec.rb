@@ -54,4 +54,28 @@ describe LunchTeam do
       end
     end
   end
+
+  describe 'LunchTeam.choice' do
+    let(:team_num) { 2 }
+    let(:all_members) do
+      [
+        { name: 'やまぐち', japanese: true },
+        { name: 'みとも', japanese: true },
+        { name: 'おしだ', japanese: true },
+        { name: 'えび', japanese: true }
+      ]
+    end
+    let(:history) do
+      [
+        [%w[えび みとも], %w[おしだ やまぐち]],
+        [%w[えび おしだ], %w[みとも やまぐち]]
+      ]
+    end
+    let(:expected) { [%w[えび やまぐち], %w[おしだ みとも]] }
+    it do
+      result = LunchTeam.choice(all_members, team_num, history)
+      actual = result.map { |team| team.map { |x| x[:name] } }.map(&:sort).sort
+      expect(actual).to eq expected
+    end
+  end
 end
