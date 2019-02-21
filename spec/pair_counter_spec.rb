@@ -25,6 +25,19 @@ describe PairCounter do
     it { expect(counter[:えび_ポール]).to eq 0 }
     it { expect(counter[:えび_やまぐち]).to eq 1 }
     it { expect(counter[:えび_みとも]).to eq 2 }
+
+    context 'when history including retiree name' do
+      let(:all_member_name) { %w[やまぐち はすみ みとも タイン ポール ハー シヴァン おしだ おくだ] }
+      let(:history) do
+        [
+          [%w[やまぐち みとも えび], %w[はすみ タイン シヴァン], %w[おしだ ポール ハー]],
+          [%w[ポール はすみ シヴァン], %w[やまぐち タイン ハー], %w[おしだ みとも おくだ]]
+        ]
+      end
+      it { expect(counter[:おくだ_ポール]).to eq 0 }
+      it { expect(counter[:おくだ_みとも]).to eq 1 }
+      it { expect(counter[:はすみ_シヴァン]).to eq 2 }
+    end
   end
 
   describe '#dup' do

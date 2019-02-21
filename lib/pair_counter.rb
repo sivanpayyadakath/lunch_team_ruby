@@ -12,7 +12,7 @@ class PairCounter
     history.flatten(1)
            .flat_map { |team| team.combination(2).to_a }
            .map(&method(:to_pair_sym))
-           .each { |pair| @map[pair] += 1 }
+           .each { |pair| @map[pair] += 1 if @map.has_key?(pair) }
   end
 
   def [](pair)
